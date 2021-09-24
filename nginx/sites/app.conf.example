@@ -41,3 +41,18 @@ server {
     error_log /var/log/nginx/app_error.log;
     access_log /var/log/nginx/app_access.log;
 }
+
+// magento 2
+upstream fastcgi_backend {
+   server  php-fpm:9000;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name shortys.local;
+    set $MAGE_ROOT /var/www/;
+    include /var/www/nginx.conf.sample;
+}
+
